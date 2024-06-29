@@ -48,13 +48,18 @@ public class Main {
 
     private static class InventoryCounter {
         private int inventoryCount = 0;
+        final Object lock = new Object();
 
         public void increment() {
-            inventoryCount++;
+            synchronized (lock) {
+                inventoryCount++;
+            }
         }
 
         public void decrement() {
-            inventoryCount--;
+            synchronized (lock) {
+                inventoryCount--;
+            }
         }
 
         public int getInventoryCount() {
